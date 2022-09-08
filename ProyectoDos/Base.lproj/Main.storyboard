@@ -208,11 +208,57 @@
                     <connections>
                         <outlet property="loadingIndicatorView" destination="e3A-5s-xeT" id="j4R-LS-hha"/>
                         <outlet property="pokemonTableView" destination="JQ8-oz-zxM" id="UPa-sH-Ooh"/>
+                        <segue destination="BtJ-cf-ccM" kind="show" identifier="especificPokemonSegue" id="Vtq-6k-7VM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zp4-aV-4Iq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1362.3188405797102" y="1076.1160714285713"/>
+        </scene>
+        <!--Detailed Pokemon View Controller-->
+        <scene sceneID="r5u-9M-5NG">
+            <objects>
+                <viewController id="BtJ-cf-ccM" customClass="DetailedPokemonViewController" customModule="ProyectoDos" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ivw-PN-bnw">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X5k-gX-cAn">
+                                <rect key="frame" x="117" y="408" width="180" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="MjL-gP-0Pp"/>
+                                    <constraint firstAttribute="width" constant="180" id="tCX-gv-5vY"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8FN-IX-DaA">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="400"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="400" id="0qj-2Q-hvj"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="wSl-6H-ZdA"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="wSl-6H-ZdA" firstAttribute="trailing" secondItem="8FN-IX-DaA" secondAttribute="trailing" id="0N5-68-k8p"/>
+                            <constraint firstItem="X5k-gX-cAn" firstAttribute="centerX" secondItem="Ivw-PN-bnw" secondAttribute="centerX" id="82x-34-ia7"/>
+                            <constraint firstItem="8FN-IX-DaA" firstAttribute="leading" secondItem="wSl-6H-ZdA" secondAttribute="leading" id="Ndw-Yq-nQD"/>
+                            <constraint firstItem="8FN-IX-DaA" firstAttribute="top" secondItem="Ivw-PN-bnw" secondAttribute="top" id="P5u-ek-NOl"/>
+                            <constraint firstItem="X5k-gX-cAn" firstAttribute="top" secondItem="wSl-6H-ZdA" secondAttribute="top" constant="320" id="QOp-7P-eKw"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="IYt-y8-lF3"/>
+                    <connections>
+                        <outlet property="nombrePokemon" destination="X5k-gX-cAn" id="bEC-fl-7L6"/>
+                        <outlet property="pokemonImageView" destination="8FN-IX-DaA" id="GdJ-fN-W3g"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rtt-Ge-R67" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2353.6231884057975" y="983.70535714285711"/>
         </scene>
         <!--Home-->
         <scene sceneID="Jog-Am-Obg">

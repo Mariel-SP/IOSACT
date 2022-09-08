@@ -19,22 +19,35 @@ struct Pokemon: Decodable {
     var url: String
 }
 
+class GoToPokemon{
+    var title: String
+    var segueId: String
+    
+    init(title: String, segueId: String){
+        self.title = title
+        self.segueId = segueId
+    }
+}
+
 class PokemonListViewController: UIViewController {
 
     @IBOutlet weak var loadingIndicatorView: UIActivityIndicatorView!
     @IBOutlet weak var pokemonTableView: UITableView!
     
     var pokemons: [Pokemon] = []
+    var currentPokemon: Pokemon? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        pokemonTableView.register(UINib(nibName: "PokemonTableViewCell", bundle: nil), forCellReuseIdentifier: "pokemonCell")
         pokemonTableView.dataSource = self
         loadingIndicatorView.hidesWhenStopped = true
         loadingIndicatorView.startAnimating()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5.0){
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0){
             self.loadPokemons()
         }
+        pokemonTableView.delegate = self
 
     }
     
@@ -55,6 +68,13 @@ class PokemonListViewController: UIViewController {
         }
         task.resume()
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "especificPokemonSegue" {
+            let detailedPokemonViewController = segue.destination as? DetailedPokemonViewController
+            detailedPokemonViewController?.pokemons = currentPokemon
+        }
+    }
 
 }
 
@@ -64,13 +84,19 @@ extension PokemonListViewController: UITableViewDataSource, UITableViewDelegate 
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell = pokemonTableView.dequeueReusableCell(withIdentifier: "cell")
+        var cell = pokemonTableView.dequeueReusableCell(withIdentifier: "pokemonCell") as? PokemonTableViewCell
         if(cell == nil){
-            cell = UITableViewCell()
+            cell = PokemonTableViewCell()
         }
         let item = pokemons[indexPath.row]
-        cell?.textLabel?.text = item.name
+        //cell?.textLabel?.text = item.name
+        cell?.setupView(pokemon: item)
         return cell!
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        currentPokemon = pokemons[indexPath.row]
+        performSegue(withIdentifier: "especificPokemonSegue", sender: nil)
     }
 
 }
